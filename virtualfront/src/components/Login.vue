@@ -1,5 +1,5 @@
 <template>
-    <div class="login user">
+    <div class="login_user">
         <div class="container login_user">
             <h2> Iniciar sesión </h2>
             <form @submit.prevent="processLoginUser">
@@ -10,18 +10,14 @@
                 <button type="submit"> Iniciar Sesión </button>
                 <br>
                 <br>
-                <br>
-                
-
+                <br>               
             </form>
         </div>
     </div>
-
-  
-
 </template>
-
 <script>
+/*Se importa axios */
+import axios from "../utils/axios" 
 export default {
     name: "Login",
     data: function(){
@@ -30,13 +26,26 @@ export default {
             username: "",
             password: ""
             }
-
         }      
     },
 
     methods: {
-        processLoginUser: function(){
-            console.log(this.user)
+        processLoginUser: function(){            
+            axios.post("login/", this.user, {headers: {}})
+            .then( (result) => {
+                let dataLogin = {
+                    username: this.user.username,
+                    token_access: result.data.access,
+                    token_refresh: result.data.refresh,
+                } 
+                  
+                this.$emit('completedLogin', dataLogin)    
+                            
+            })
+            .catch((error) =>{
+              if (error.response.status == "401")
+                  alert("ERROR 401: Credenciales Incorrectas")
+            })
         }
 }
 
@@ -47,8 +56,6 @@ export default {
 </script>
 
 <style>
-
-
     .container {
         border: solid #283747;
         width: 30%;

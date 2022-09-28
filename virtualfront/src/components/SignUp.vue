@@ -43,17 +43,17 @@ export default {
     data: function(){
         return{
             register: {
-            username: "",
-            password: "",
-            name:"",
-            lastname:"",
-            email:"",
-            typedocument:"",
-            document:"",
-            telephone:"",
-            address:"",
-            gender:"",
-            isactivate:"",
+                username: "",
+                password: "",
+                name:"",
+                lastname:"",
+                email:"",
+                typedocument:"",
+                document:"",
+                telephone:"",
+                address:"",
+                gender:"",
+                isactivate:"",
 
 
             }

@@ -6,11 +6,12 @@
     <div class="header">
       <h1>  Virtual Animal</h1>
       <nav v-if="is_auth">
-        <button>Inicio</button>
+        <button @click="loadHome">Inicio</button>
         <button>Servicios</button>
         <button>Vacunación</button>
         <button>Animales</button>
         <button>Enfermedades</button>
+        <button @click="Logout">Cerrar sesión</button>
       </nav>
 
       <nav v-else>
@@ -44,6 +45,26 @@ export default {
 
   },
   methods: {
+    completedLogin: function(dataLogin) {
+      
+      alert("casi que nos va funcionando")
+      localStorage.setItem("isAuth", true);
+      localStorage.setItem("username", dataLogin.username);
+      localStorage.setItem("token_access", dataLogin.token_access);
+      localStorage.setItem("token_refresh", dataLogin.token_refresh);
+      alert("Autenticación exitosa")
+      this.verifyAuth()
+    },
+
+    verifyAuth: function(){
+      this.is_auth = localStorage.getItem("isAuth") || false;
+      if(this.is_auth)
+        this.$router.push({name: "home"})
+      else
+        this.$router.push({name: "login"})
+
+    },
+
     loadLogin: function(){
       this.$router.push({name:"login"})
     },
@@ -52,9 +73,19 @@ export default {
       this.$router.push({name:"signup"})
     },
 
+    loadHome: function(){
+      this.$router.push({name:"home"})
+    },
+
+    Logout: function(){
+      localStorage.clear();
+      alert("Sesion finalizada");
+      this.verifyAuth();
+    }
+
+
+    
   }
-
-
 }
 
 </script>
