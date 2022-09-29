@@ -1,31 +1,29 @@
 <template>
-    <div class="register user">
-        <div class="container register_user">
-            <h2> Registro </h2>
+    <div class="signUp user">
+        <div class="container signUp_user">
+            <h2> Registrarse </h2>
             <form @submit.prevent="processSignUp">
-                <input type="text"  v-model="register.username" placeholder="Username">
+                <input type="text"  v-model="user.username" placeholder="Username">
                 <br>
-                <input type="text" v-model="register.password" placeholder="Password">
+                <input type="text" v-model="user.password" placeholder="Password">
                 <br>
-                <input type="text" v-model="register.name" placeholder="Name">
+                <input type="text" v-model="user.name" placeholder="Name">
                 <br>
-                <input type="text" v-model="register.lastname" placeholder="Lastname">
+                <input type="text" v-model="user.lastname" placeholder="Lastname">
                 <br>
-                <input type="text" v-model="register.email" placeholder="Email">
+                <input type="text" v-model="user.email" placeholder="Email">
                 <br>
-                <input type="text" v-model="register.typedocument" placeholder="Typedocument">
+                <input type="text" v-model="user.typedocument" placeholder="Typedocument">
                 <br>
-                <input type="text" v-model="register.document" placeholder="Document">
+                <input type="text" v-model="user.document" placeholder="Document">
                 <br>
-                <input type="text" v-model="register.telephone" placeholder="Telephone">
+                <input type="text" v-model="user.telephone" placeholder="Telephone">
                 <br>
-                <input type="text" v-model="register.address" placeholder="Address">
+                <input type="text" v-model="user.address" placeholder="Address">
                 <br>
-                <input type="text" v-model="register.gender" placeholder="Gender">
+                <input type="text" v-model="user.gender" placeholder="Gender">
                 <br>
-                <input type="text" v-model="register.isactivate" placeholder="Isactivate">
-                <br>
-                <button type="submit"> Enviar </button>
+                <button type="submit"> Registrarse </button>
                 <br>
                 <br>
                 <br>
@@ -33,16 +31,15 @@
         </div>
     </div>
 
-  
-
 </template>
 
 <script>
+import axios from "../utils/axios" 
 export default {
     name: "SignUp",
     data: function(){
         return{
-            register: {
+            user: {
                 username: "",
                 password: "",
                 name:"",
@@ -53,7 +50,7 @@ export default {
                 telephone:"",
                 address:"",
                 gender:"",
-                isactivate:"",
+                isactivate:true,
 
 
             }
@@ -63,12 +60,25 @@ export default {
 
     methods: {
         processSignUp: function(){
-            console.log(this.register)
+            axios.post("user/", this.user, {headers: {}}) /* Promesa en java Scrip*/
+            .then( (res)=> {
+                let dataLogin = {
+                    username: this.user.username,
+                    token_access: res.data.access,
+                    token_refresh: res.data.refresh,
+                }                
+                
+                this.$emit('completedLogin', dataLogin) /* Se le manda un evento */
+    
+            })
+            .catch( (error) =>{
+                    alert("Error: Fallo en el registro")
+                    
+            })
         }
 }
 
 }
-
 </script>
 
 
@@ -81,7 +91,7 @@ export default {
         border-radius: 20px;     
     }
 
-    .container register_user {
+    .container signUp_user {
         border: 3px solid #283747;
         border-radius: 10px;
         width: 80%;
@@ -93,7 +103,7 @@ export default {
        
     }
 
-    .register_user h2 {
+    .signUp_user h2 {
         color: #283747;
         width: 80%;
         margin: 1px auto;
@@ -102,13 +112,13 @@ export default {
          
     }
 
-    .register_user form {
+    .signUp_user form {
         width: 80%;
         margin: 0px auto;
         padding-top: 3%;
     }
 
-    .register_user input {
+    .signUp_user input {
         height: 40px;
         width: 100%;
         padding: 3px 20px;
@@ -117,7 +127,7 @@ export default {
         margin-bottom: 2%;
     }
 
-    .register_user button {
+    .signUp_user button {
         width: 100%;
         height: 40px;
         color: #e5e7e9;
@@ -126,7 +136,7 @@ export default {
         border-radius: 5px;
     }
 
-    .register_user button:hover {
+    .signUp_user button:hover {
         color: #e5e7e9;
         background: crimson;
         border: 1px solid #283747;

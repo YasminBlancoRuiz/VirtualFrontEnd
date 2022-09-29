@@ -15,6 +15,7 @@
         </div>
     </div>
 </template>
+
 <script>
 /*Se importa axios */
 import axios from "../utils/axios" 
@@ -30,7 +31,8 @@ export default {
     },
 
     methods: {
-        processLoginUser: function(){            
+        processLoginUser: function(){ 
+                       
             axios.post("login/", this.user, {headers: {}})
             .then( (result) => {
                 let dataLogin = {
@@ -38,8 +40,9 @@ export default {
                     token_access: result.data.access,
                     token_refresh: result.data.refresh,
                 } 
+                console.log(dataLogin)
+                this.$emit('completedLogin', dataLogin)  
                   
-                this.$emit('completedLogin', dataLogin)    
                             
             })
             .catch((error) =>{

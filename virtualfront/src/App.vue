@@ -22,7 +22,11 @@
     </div>
 
     <div class="main-component">
-      <router-view>
+      
+      <router-view
+        @completedLogin = "completedLogin" 
+        @Logout= "logout"
+      >
 
       </router-view>
     </div>
@@ -45,17 +49,7 @@ export default {
 
   },
   methods: {
-    completedLogin: function(dataLogin) {
-      
-      alert("casi que nos va funcionando")
-      localStorage.setItem("isAuth", true);
-      localStorage.setItem("username", dataLogin.username);
-      localStorage.setItem("token_access", dataLogin.token_access);
-      localStorage.setItem("token_refresh", dataLogin.token_refresh);
-      alert("Autenticación exitosa")
-      this.verifyAuth()
-    },
-
+  
     verifyAuth: function(){
       this.is_auth = localStorage.getItem("isAuth") || false;
       if(this.is_auth)
@@ -77,13 +71,25 @@ export default {
       this.$router.push({name:"home"})
     },
 
-    Logout: function(){
+    loadAccount: function(){
+      this.$router.push({name:"account"})
+    },
+
+    logout: function(){
       localStorage.clear();
       alert("Sesion finalizada");
       this.verifyAuth();
-    }
+    },
 
-
+    completedLogin: function(data) {
+      console.log(dataLogin)
+      localStorage.setItem("isAuth", true);
+      localStorage.setItem("username", data.username);
+      localStorage.setItem("token_access", data.token_access);
+      localStorage.setItem("token_refresh", data.token_refresh);
+      alert("Autenticación exitosa")
+      this.verifyAuth()
+    },
     
   }
 }
