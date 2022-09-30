@@ -29,6 +29,10 @@ const routes = [
     component: SignUp
   },
 
+
+
+
+
 ]
 
 const router = createRouter({

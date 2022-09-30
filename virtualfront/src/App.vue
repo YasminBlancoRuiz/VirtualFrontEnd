@@ -7,17 +7,19 @@
       <h1>  Virtual Animal</h1>
       <nav v-if="is_auth">
         <button @click="loadHome">Inicio</button>
-        <button>Servicios</button>
+        <button >Servicios</button>
         <button>Vacunación</button>
         <button>Animales</button>
         <button>Enfermedades</button>
-        <button @click="Logout">Cerrar sesión</button>
+        <button @click="logout">Cerrar sesión</button>
       </nav>
 
-      <nav v-else>
+      <nav2 v-else>
         <button @click="loadLogin"> Iniciar sesión </button>
         <button @click="loadSignUp">Registrarse</button>
-      </nav>
+      </nav2>
+
+ 
 
     </div>
 
@@ -25,7 +27,10 @@
       
       <router-view
         @completedLogin = "completedLogin" 
-        @Logout= "logout"
+        @completedSignUp = "completedSignUp"
+        @loadHome = "loadHome"
+        @logout= "logout"
+        
       >
 
       </router-view>
@@ -75,6 +80,11 @@ export default {
       this.$router.push({name:"account"})
     },
 
+    loadCreateService: function(){
+      this.$router.push({name:"serviciocreate"})
+      
+    },
+
     logout: function(){
       localStorage.clear();
       alert("Sesion finalizada");
@@ -82,15 +92,24 @@ export default {
     },
 
     completedLogin: function(data) {
-      console.log(dataLogin)
-      localStorage.setItem("isAuth", true);
+      console.log(data)  
+      localStorage.setItem("isAuth", true);     	
       localStorage.setItem("username", data.username);
       localStorage.setItem("token_access", data.token_access);
       localStorage.setItem("token_refresh", data.token_refresh);
       alert("Autenticación exitosa")
       this.verifyAuth()
+      
+    },
+
+    completedSignUp: function(data) {
+     alert("Registro Exitoso")
+     this.$router.push({name: "login"})
     },
     
+
+
+
   }
 }
 
@@ -125,12 +144,22 @@ export default {
 
   
   .header h1{
-    width: 20%;
+    width: 2  0%;
     text-align: center;
 
   }
 
   .header nav { 
+    height: 100%; 
+    width: 50%;
+    font-size: 20px;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+   .header nav2 { 
     height: 100%; 
     width: 20%;
     font-size: 20px;
@@ -149,6 +178,21 @@ export default {
   }
 
   .header nav button:hover { 
+    color: #283747;
+    background-color: #e5e7e9;
+    border: 1px solid #e5e7e9;
+   
+  }
+
+    .header nav2 button { 
+    color: #e5e7e9;
+    background-color: #283747;
+    border: 1px solid #e5e7e9;
+    border-radius: 5px;
+    padding: 10px 20px;
+  }
+
+  .header nav2 button:hover { 
     color: #283747;
     background-color: #e5e7e9;
     border: 1px solid #e5e7e9;
@@ -180,7 +224,4 @@ export default {
     align-items: center;
 
   }
-
-
-
 </style>

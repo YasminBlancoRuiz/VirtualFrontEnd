@@ -30,7 +30,6 @@
             </form>
         </div>
     </div>
-
 </template>
 
 <script>
@@ -51,10 +50,7 @@ export default {
                 address:"",
                 gender:"",
                 isactivate:true,
-
-
             }
-
         }      
     },
 
@@ -64,16 +60,14 @@ export default {
             .then( (res)=> {
                 let dataLogin = {
                     username: this.user.username,
-                    token_access: res.data.access,
-                    token_refresh: res.data.refresh,
                 }                
-                
-                this.$emit('completedLogin', dataLogin) /* Se le manda un evento */
+                console.log(res.data.access)
+                this.$emit('completedSignUp', dataLogin) /* Se le manda un evento */
     
             })
             .catch( (error) =>{
                     alert("Error: Fallo en el registro")
-                    
+                    console.log(error.response.data)
             })
         }
 }

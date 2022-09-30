@@ -40,7 +40,7 @@ export default {
                     token_access: result.data.access,
                     token_refresh: result.data.refresh,
                 } 
-                console.log(dataLogin)
+                
                 this.$emit('completedLogin', dataLogin)  
                   
                             
@@ -48,6 +48,7 @@ export default {
             .catch((error) =>{
               if (error.response.status == "401")
                   alert("ERROR 401: Credenciales Incorrectas")
+                  console.log(error.response.data)
             })
         }
 }
