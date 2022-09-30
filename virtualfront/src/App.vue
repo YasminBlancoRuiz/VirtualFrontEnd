@@ -9,7 +9,7 @@
         <button @click="loadHome">Inicio</button>
         <button >Servicios</button>
         <button>Vacunación</button>
-        <button>Animales</button>
+        <button @click="loadPet">Mascota</button>
         <button>Enfermedades</button>
         <button @click="logout">Cerrar sesión</button>
       </nav>
@@ -30,7 +30,6 @@
         @completedSignUp = "completedSignUp"
         @loadHome = "loadHome"
         @logout= "logout"
-        
       >
 
       </router-view>
@@ -67,6 +66,7 @@ export default {
     loadLogin: function(){
       this.$router.push({name:"login"})
     },
+    
 
     loadSignUp: function(){
       this.$router.push({name:"signup"})
@@ -80,9 +80,8 @@ export default {
       this.$router.push({name:"account"})
     },
 
-    loadCreateService: function(){
-      this.$router.push({name:"serviciocreate"})
-      
+    loadPet: function(){
+      this.$router.push({name:"pet"})      
     },
 
     logout: function(){
@@ -107,6 +106,11 @@ export default {
      this.$router.push({name: "login"})
     },
     
+
+    completedRegisterPet: function(data) {
+    alert("Registro Exitoso")
+    this.$router.push({name: "login"})
+    },
 
 
 
