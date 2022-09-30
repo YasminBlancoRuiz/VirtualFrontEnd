@@ -8,10 +8,12 @@ import Home from '../components/Home';
 
 
 
+
+
 const routes = [
   {
     path: '/',
-    name: 'root',
+    name: 'home',
     component: Home
   },
 
@@ -26,6 +28,10 @@ const routes = [
     name: 'signup',
     component: SignUp
   },
+
+
+
+
 
 ]
 
