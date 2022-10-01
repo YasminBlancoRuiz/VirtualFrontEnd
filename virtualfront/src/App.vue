@@ -7,10 +7,8 @@
       <h1>  Virtual Animal</h1>
       <nav v-if="is_auth">
         <button @click="loadHome">Inicio</button>
-        <button >Servicios</button>
-        <button>Vacunación</button>
         <button @click="loadPet">Mascota</button>
-        <button>Enfermedades</button>
+        <button>Cliente</button>
         <button @click="logout">Cerrar sesión</button>
       </nav>
 
@@ -30,6 +28,8 @@
         @completedSignUp = "completedSignUp"
         @loadHome = "loadHome"
         @logout= "logout"
+        @processPetUpdate = "processPetUpdate"
+        @completedPetCreate = "completedPetCreate"
       >
 
       </router-view>
@@ -67,7 +67,6 @@ export default {
       this.$router.push({name:"login"})
     },
     
-
     loadSignUp: function(){
       this.$router.push({name:"signup"})
     },
@@ -78,10 +77,6 @@ export default {
 
     loadAccount: function(){
       this.$router.push({name:"account"})
-    },
-
-    loadPet: function(){
-      this.$router.push({name:"pet"})      
     },
 
     logout: function(){
@@ -105,14 +100,20 @@ export default {
      alert("Registro Exitoso")
      this.$router.push({name: "login"})
     },
-    
 
-    completedRegisterPet: function(data) {
-    alert("Registro Exitoso")
+    loadPet: function(){
+      this.$router.push({name:"pet"})      
+    },
+    
+    processPetUpdate: function(data) {
+    alert("Se actualiza de manera exitosa")
     this.$router.push({name: "login"})
     },
 
 
+    completedPetCreate: function(data) {
+     alert("Registro Exitoso")     
+    },
 
   }
 }
