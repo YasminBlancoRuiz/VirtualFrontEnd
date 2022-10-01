@@ -42,7 +42,7 @@ export default {
                 } 
                 
                 this.$emit('completedLogin', dataLogin)  
-                  
+                   
                             
             })
             .catch((error) =>{
