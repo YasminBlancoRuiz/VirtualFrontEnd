@@ -8,7 +8,7 @@
       <nav v-if="is_auth">
         <button @click="loadHome">Inicio</button>
         <button @click="loadPet">Mascota</button>
-        <button>Cliente</button>
+        <button @click="loadClient">Cliente</button>
         <button @click="logout">Cerrar sesión</button>
       </nav>
 
@@ -30,6 +30,8 @@
         @logout= "logout"
         @processPetUpdate = "processPetUpdate"
         @completedPetCreate = "completedPetCreate"
+        @processClientUpdate = "processClientUpdate"
+        @completedClientCreate = "completedClientCreate"
       >
 
       </router-view>
@@ -114,6 +116,20 @@ export default {
     completedPetCreate: function(data) {
      alert("Registro Exitoso")     
     },
+
+    loadClient: function(){
+      this.$router.push({name:"client"})      
+    },
+    
+    processClientUpdate: function(data) {
+    alert("Se actualiza de manera exitosa")
+    this.$router.push({name: "login"})
+    },
+
+
+    completedClientCreate: function(data) {
+     alert("Registro Exitoso")     
+    }
 
   }
 }

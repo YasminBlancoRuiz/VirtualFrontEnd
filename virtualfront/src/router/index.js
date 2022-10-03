@@ -4,6 +4,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import Login from '../components/Login';
 import SignUp from '../components/SignUp';
 import Pet from '../components/Pet';
+import Client from '../components/Client';
 import Home from '../components/Home';
 
 
@@ -35,7 +36,11 @@ const routes = [
     component: Pet
   },
 
-
+  {
+    path: '/user/client',
+    name: 'client',
+    component: Client
+  },
 
 
 
