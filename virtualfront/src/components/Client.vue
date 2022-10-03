@@ -34,3 +34,130 @@
         </div>
     </div>
 </template>
+
+<script>
+    import axios from "../utils/axios" 
+    export default {
+        name: "Client",
+        data: function(){
+            return{
+                client: {
+                    name: "",
+                    lastname: "",
+                    email:"",
+                    document:"",
+                    typedocument:"",
+                    telephone:"",
+                    address:"",
+                    gender:"",
+                    isactive:true,
+                    id:""
+                }
+            }      
+        },
+    
+        
+       methods: {
+            processClientGet: function()
+            {                               
+                 // GET request using axios with set headers
+                const headers = { "Content-Type": "application/json", "Authorization": `Bearer ${localStorage.getItem('token_access')}`};
+                axios.get("client/"+this.client.id, { headers })
+                .then(response1 => {console.log(response1)
+                    let datosClient = {
+                        name: response1.data.name,
+                        lastname: response1.data.lastname,
+                        email: response1.data.email,
+                        document: response1.data.document,
+                        typedocument: response1.data.typedocument_id,
+                        telephone: response1.data.telephone,
+                        address: response1.data.address,
+                        gender: response1.data.gender,
+                        isactive: response1.data.isactive,
+                        id: response1.data.id                    
+                    }
+    
+                    this.client.name = datosClient.name,
+                    this.client.lastname = datosClient.lastname,
+                    this.client.email = datosClient.email,
+                    this.client.document = datosClient.document,
+                    this.client.typedocument = datosClient.typedocument,
+                    this.client.telephone = datosClient.telephone,
+                    this.client.address = datosClient.address,
+                    this.client.gender = datosClient.gender,
+                    this.client.isactive = datosClient.isactive,
+                    this.client.id = datosClient.id  
+    
+                })
+                .catch( (error) =>{                 
+                        alert("Id de cliente no existe")   
+                                         
+                })
+        },
+    
+        processClientDelete: function()
+            {                               
+                 // GET request using axios with set headers
+                const headers = { "Content-Type": "application/json", "Authorization": `Bearer ${localStorage.getItem('token_access')}`};            
+                axios.delete("client/"+this.client.id, { headers })
+                .then(() => alert('Cliente Eliminado'))
+                    this.client.name = "",
+                    this.client.lastname = "",
+                    this.client.email = "",
+                    this.client.document = "",
+                    this.client.typedocument = "",
+                    this.client.telephone = "",
+                    this.client.address = "",
+                    this.client.gender = "",
+                    this.client.isactive = "",
+                    this.client.id = ""             
+        },
+    
+         processClientCreate: function()
+            {                               
+                const headers = { "Content-Type": "application/json", "Authorization": `Bearer ${localStorage.getItem('token_access')}`};            
+                axios.post("client/", this.client, {headers}) /* Promesa en java Scrip*/
+                .then( (res)=> {
+                    let datosClient = {
+                        name : datosClient.name,
+                        lastname : datosClient.lastname,
+                        email : datosClient.email,
+                        document : datosClient.document,
+                        typedocument : datosClient.typedocument,
+                        telephone : datosClient.telephone,
+                        address : datosClient.address,
+                        gender : datosClient.gender,
+                        isactive : datosClient.isactive
+                    }                
+                    console.log(res.data.access)
+                    this.$emit('completedClientCreate', datosClient) /* Se le manda un evento */
+        
+                })
+                .catch( (error) =>{
+                        alert("Error: Fallo en el registro")
+                        console.log(error.response.data)
+                })                       
+        },
+                        
+            processClientEdit: function()
+            {   
+                const article = { title: 'React PUT Request Example' };                            
+                const headers = { "Content-Type": "application/json", "Authorization": `Bearer ${localStorage.getItem('token_access')}`};            
+                axios.put("client/"+this.client.id, this.client,  { headers })
+                .then(response => { alert("Cliente Editada") })
+                
+                .catch( (error) =>{
+                        alert("Error: Fallo en la edición")
+                        console.log(error.response.data)
+                })
+                          
+            }
+         
+     
+     
+     
+     }
+     
+    
+    }
+    </script>
