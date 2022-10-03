@@ -119,15 +119,15 @@
                 axios.post("client/", this.client, {headers}) /* Promesa en java Scrip*/
                 .then( (res)=> {
                     let datosClient = {
-                        name : datosClient.name,
-                        lastname : datosClient.lastname,
-                        email : datosClient.email,
-                        document : datosClient.document,
-                        typedocument : datosClient.typedocument,
-                        telephone : datosClient.telephone,
-                        address : datosClient.address,
-                        gender : datosClient.gender,
-                        isactive : datosClient.isactive
+                        name : res.data.name,
+                        lastname : res.data.lastname,
+                        email : res.data.email,
+                        document : res.data.document,
+                        typedocument : res.data.typedocument,
+                        telephone : res.data.telephone,
+                        address : res.data.address,
+                        gender : res.data.gender,
+                        isactive : res.data.isactive
                     }                
                     console.log(res.data.access)
                     this.$emit('completedClientCreate', datosClient) /* Se le manda un evento */
