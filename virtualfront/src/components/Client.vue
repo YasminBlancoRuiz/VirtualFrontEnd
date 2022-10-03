@@ -161,3 +161,67 @@
     
     }
     </script>
+
+    
+<style>
+    .container {
+        border: solid #283747;
+        width: 30%;
+        margin: auto;
+        margin-top: 1%;
+        border-radius: 20px;     
+    }
+
+    .container signUp_client {
+        border: 3px solid #283747;
+        border-radius: 10px;
+        width: 80%;
+        height: 60%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+       
+    }
+
+    .signUp_client h2 {
+        color: #283747;
+        width: 80%;
+        margin: 1px auto;
+        padding-top: 4%;
+        text-align: center;
+         
+    }
+
+    .signUp_client form {
+        width: 80%;
+        margin: 0px auto;
+        padding-top: 3%;
+    }
+
+    .signUp_client input {
+        height: 40px;
+        width: 100%;
+        padding: 3px 20px;
+        margin: 5px 8;
+        border: 1px solid #283747;
+        margin-bottom: 2%;
+    }
+
+    .signUp_client button {
+        width: 100%;
+        height: 40px;
+        color: #e5e7e9;
+        background: #283747;
+        border: 1px solid #e5e7e9;
+        border-radius: 5px;
+    }
+
+    .signUp_client button:hover {
+        color: #e5e7e9;
+        background: crimson;
+        border: 1px solid #283747;
+
+    }
+
+</style>
